@@ -1,0 +1,255 @@
+<section class="section">
+    <div class="container">
+
+        <h1 class="title">Class Creation</h1>
+        <button type="submit" class="button is-info" (click)="createClassJson()">Create</button>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Classname</label>
+            </div>
+            <div class="field-body">
+                <input class="input" type="text" placeholder="Classname" [(ngModel)]="className">
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Image URL</label>
+            </div>
+            <div class="field-body">
+                <input class="input" type="text" placeholder="Image" [(ngModel)]="classImage">
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Flavour text</label>
+            </div>
+            <div class="field-body">
+                <textarea class="textarea" placeholder="Flavour text" [(ngModel)]="flavourText"></textarea>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Role text</label>
+            </div>
+            <div class="field-body">
+                <textarea class="textarea" placeholder="Role text" [(ngModel)]="roleText"></textarea>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Alignment</label>
+            </div>
+            <div class="field-body">
+                <input class="input" type="text" placeholder="Alignment" [(ngModel)]="alignment">
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Maxlevel</label>
+            </div>
+            <div class="field-body">
+                <input class="input" [(ngModel)]="maxLevel" type="number" min="5" max="20">
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Hit Die</label>
+            </div>
+            <div class="field-body">
+                <div class="select">
+                    <select [(ngModel)]="hitDie">
+                        <option>6</option>
+                        <option>8</option>
+                        <option>10</option>
+                        <option>12</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Starting Wealth</label>
+            </div>
+            <div class="field-body">
+                <input class="input" type="text" [(ngModel)]="startingWealth" value="">
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Class Skills</label>
+            </div>
+            <div class="field-body">
+                <div class="select is-multiple">
+                    <select [(ngModel)]="classSkills" multiple size="8">
+                        <option *ngFor="let classSkill of availableClassSkills">{{classSkill}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Skill Ranks Per Level</label>
+            </div>
+            <div class="field-body">
+                <div class="select">
+                    <select [(ngModel)]="skillRanksPerLevel">
+                        <option>2</option>
+                        <option>4</option>
+                        <option>6</option>
+                        <option>8</option>
+                    </select>
+                </div>
+                <div class="select">
+                    <select [(ngModel)]="skillRanksPerLevelModifier">
+                        <option>Int</option>
+                        <option>Cha</option>
+                        <option>Wis</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Proficiency</label>
+            </div>
+            <div class="field-body">
+                <input class="input" type="text" [(ngModel)]="weaponAndArmorProficiency" value="">
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">BaB</label>
+            </div>
+            <div class="field-body">
+                <div class="select">
+                    <select [(ngModel)]="bab">
+                        <option>Full</option>
+                        <option>3/4</option>
+                        <option>Half</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Fortitude Save</label>
+            </div>
+            <div class="field-body">
+                <div class="select">
+                    <select [(ngModel)]="fortitudeSave">
+                        <option>Good Save</option>
+                        <option>Bad Save</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Reflex Save</label>
+            </div>
+            <div class="field-body">
+                <div class="select">
+                    <select [(ngModel)]="reflexSave">
+                        <option>Good Save</option>
+                        <option>Bad Save</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Will Save</label>
+            </div>
+            <div class="field-body">
+                <div class="select">
+                    <select [(ngModel)]="willSave">
+                        <option>Good Save</option>
+                        <option>Bad Save</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field has-addons">
+            <div class="field-label is-normal">
+                <label class="label">Spell Caster</label>
+            </div>
+            <div class="field-body">
+                <div class="control">
+                    <div class="select">
+                        <select [(ngModel)]="spellCasterType" (change)="spellCasterTypeChanged()">
+                            <option>No</option>
+                            <option>Spontaneuos</option>
+                            <option>Preparing</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control" *ngIf="isSpellCaster">
+                    <input class="input" type="number" placeholder="Casting starts at level" min="1" max="{{maxLevel}}" [(ngModel)]="spellLevelStarting">
+                </div>
+                <div class="control" *ngIf="isSpellCaster">
+                    <div class="select">
+                        <select [(ngModel)]="spellProgression">
+                            <option>Full Caster (Cleric)</option>
+                            <option>Half Caster (Bard)</option>
+                            <option>Low Caster (Paladin)</option>
+                            <option>Low Caster (Bloodrager)</option>
+                            <option>Max Caster (Sorcerer)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="field has-addons">
+            <div class="control is-expanded">
+                <input class="input" type="text" placeholder="Abilityname" [(ngModel)]="abilityName">
+            </div>
+            <div class="control">
+                <div class="select">
+                    <select [(ngModel)]="abilityType">
+                        <option>Ex</option>
+                        <option>Su</option>
+                        <option>Sp</option>
+                        <option>-</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control">
+                <input class="input" type="number" [(ngModel)]="abilityLevel" placeholder="Level" min="1" max="{{maxLevel}}">
+            </div>
+            <div class="control">
+                <button type="submit" class="button is-info" (click)="addAbility()">Add</button>
+            </div>
+        </div>
+        <br>
+        <div *ngFor="let ability of abilities">
+            <div class="field has-addons">
+                <div class="control is-expanded">
+                    <input class="input" type="text" placeholder="Abilityname" [(ngModel)]="ability.abilityName">
+                </div>
+                <div class="control">
+                    <div class="select">
+                        <select [(ngModel)]="ability.abilityType">
+                            <option>Ex</option>
+                            <option>Su</option>
+                            <option>Sp</option>
+                            <option>-</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control">
+                    <input class="input" type="number" [(ngModel)]="ability.abilityLevel" placeholder="Level" min="1" max="{{maxLevel}}">
+                </div>
+                <div class="control">
+                    <button type="submit" class="button is-warning" (click)="removeAbility($index)">Remove</button>
+                </div>
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-body">
+                    <div id="froala-editor" class="richTextEditor" [froalaEditor]='richtTextOptions' [(froalaModel)]="ability.abilityText">
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+</section>

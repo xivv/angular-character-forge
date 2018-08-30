@@ -1,0 +1,112 @@
+<section class="section">
+    <div class="container">
+        <h1 class="title">{{specialisation.className}}</h1>
+        {{specialisation.flavourText}}
+        <br>
+        <img [src]="specialisation.image" width="400" height="562">
+        <br>
+        <b>Role:</b> {{specialisation.roleText}}
+        <br>
+        <b>Alignment:</b> {{specialisation.alignment}}
+        <br>
+        <b>Hit Die:</b> d{{specialisation.hitDie}}
+        <br>
+        <b>Starting Wealth:</b> {{specialisation.startingWealth}}
+        <br><br>
+        <h2 class="title is-2">Class Skills</h2>
+        The {{specialisation.className}} class skills are
+        <span *ngFor="let classSkills of specialisation.classSkills">{{classSkills}}, </span>.
+        <br>
+        <br>
+        <div class="columns is-multiline is-mobile">
+            <div class="column">
+                <b>Table: {{specialisation.className}}</b>
+                <table class="table is-bordered is-striped is-narrow">
+                    <thead>
+                        <tr>
+                            <th><abbr title="Level">Level</abbr></th>
+                            <th><abbr title="Bab">BAB</abbr></th>
+                            <th><abbr title="Fortitude">Fortitude</abbr></th>
+                            <th><abbr title="Reflex">Reflex</abbr></th>
+                            <th><abbr title="Will">Will</abbr></th>
+                            <th><abbr title="Special">Special</abbr></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of dataSource">
+                            <td>{{getEnglishNumberEnding(row.level)}}</td>
+                            <td>+{{row.bab}}</td>
+                            <td>+{{row.fort}}</td>
+                            <td>+{{row.ref}}</td>
+                            <td>+{{row.will}}</td>
+                            <td><a (click)="scroll(special.name)" *ngFor="let special of row.special">[{{special.name}}]
+                                </a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="column is-one-quarter" *ngIf="spellLevels.length">
+                <b>Spells Per Day</b>
+                <table class="table is-bordered is-striped is-narrow">
+                    <thead>
+                        <tr>
+                            <th *ngFor="let spelllevel of spellLevels"><abbr title="Level">{{getEnglishNumberEnding(spelllevel)}}</abbr></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of dataSource">
+                            <td *ngFor="let spelllevel of row.spellsPerDay">{{spelllevel.amount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="column is-one-quarter" *ngIf="isSpontaneousCaster">
+                <b>Spells Known</b>
+                <table class="table is-bordered is-striped is-narrow">
+                    <thead>
+                        <tr>
+                            <th *ngFor="let spelllevel of spellLevels"><abbr title="Level">{{getEnglishNumberEnding(spelllevel)}}</abbr></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of dataSource">
+                            <td *ngFor="let spelllevel of row.spellsKnown">{{spelllevel.amount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+        <h2 class="title is-2">Class Features</h2>
+        All of the following are class features of the {{specialisation.className}}.<br><br>
+        <h5 class="specialHeader title is-5">Weapon and Armor Proficiency</h5>
+        {{specialisation.weaponAndArmorProficiency}}<br>
+        <div *ngFor="let progression of specialisation.levelProgression">
+            <div *ngIf="progression.special.length">
+                <br>
+                <h4 class="title is-4">Level {{progression.level}}</h4>
+                <div *ngFor="let special of progression.special">
+                    <h5 id="{{special.name}}" class="specialHeader title is-5">{{special.name}} ({{special.type}})</h5> <span
+                        [innerHTML]="special.description"></span>
+                    <br> <br>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <h2 class="title is-2">Favored Class Bonuses</h2>
+        <table class="table is-bordered is-striped is-narrow">
+            <thead>
+                <tr>
+                    <th><abbr title="Race">Race</abbr></th>
+                    <th><abbr title="Bonus">Bonus</abbr></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let row of specialisation.favouredClassBonus">
+                    <td>{{row.race}}</td>
+                    <td>{{row.bonus}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
